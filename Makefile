@@ -93,7 +93,8 @@ SRC =	ft_memchr.c\
 		ft_wstrlen.c\
 		ft_intlen.c\
 		ft_uintlen.c\
-		ft_wcharlen.c
+		ft_wcharlen.c\
+		get_next_line.c
 
 SRC_PRF =	ft_printf.c\
 			get_attributs.c \

@@ -13,6 +13,7 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define BUFF_SIZE 32
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
@@ -86,6 +87,7 @@ void				ft_lstadd(t_list **alst, t_list *new_elem);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
+int					get_next_line(int fd, char **line);
 void				ft_swap(int *a, int *b);
 size_t				ft_list_size(t_list *list);
 void				ft_foreach(int *tab, int length, void (*f)(int));
