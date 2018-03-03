@@ -17,6 +17,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <wchar.h>
+# include "printf/include/ft_printf.h"
 
 typedef struct		s_list
 {
@@ -72,9 +73,6 @@ char				*ft_strjoin(const char *s1, const char *s2);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);
 char				*ft_itoa_base(int n, int base);
-void				ft_putchar(wchar_t c);
-void				ft_putstr(const char *str);
-void				ft_putnbr(int n);
 void				ft_putnbrendl(int n);
 void				ft_putchar_fd(wchar_t c, int fd);
 void				ft_putstr_fd(const char *str, int fd);
@@ -92,11 +90,8 @@ void				ft_swap(int *a, int *b);
 size_t				ft_list_size(t_list *list);
 void				ft_foreach(int *tab, int length, void (*f)(int));
 int					ft_sqrt(int nb);
-void				ft_lstdisplay_str(t_list *list);
-void				ft_lstpushback_str(t_list **list, char *str);
 void				ft_lstclear(void *content, size_t size);
 size_t				ft_char_pos(char *str, char c);
-int					ft_abs(long nbr);
-int					ft_intlen(long nbr, int base);
 int					ft_countwords(char *str, char c);
+int					ft_intlen(intmax_t n, int base);
 #endif

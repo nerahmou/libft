@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_abs.c                                         .::    .:/ .      .::   */
+/*   ft_wstrlen.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/29 20:00:31 by nerahmou     #+#   ##    ##    #+#       */
-/*   Updated: 2018/01/11 15:55:05 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/01/07 19:18:16 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/01/22 20:04:26 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-intmax_t	ft_abs(intmax_t nbr)
+int		ft_wstrlen(const wchar_t *wstr)
 {
-	return (nbr < 0 ? -nbr : nbr);
+	int	length;
+
+	length = 0;
+	while (*wstr)
+		if (!(length += ft_wcharlen(*wstr++)))
+			return (-1);
+	return (length);
 }

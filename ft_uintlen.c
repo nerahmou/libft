@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_display_elem_name.c                           .::    .:/ .      .::   */
+/*   nbrlen.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: nerahmou <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/12/05 07:34:38 by nerahmou     #+#   ##    ##    #+#       */
-/*   Updated: 2017/12/05 07:54:46 by nerahmou    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/01/04 14:29:45 by nerahmou     #+#   ##    ##    #+#       */
+/*   Updated: 2018/01/15 22:16:55 by nerahmou    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdisplay_str(t_list *list)
+int		ft_uintlen(uintmax_t n, int base)
 {
-	while (list)
+	int length;
+
+	length = 0;
+	if (n == 0)
+		length++;
+	while (n)
 	{
-		ft_putchar('[');
-		ft_putstr(list->content);
-		ft_putchar(']');
-		ft_putstr("-->");
-		list = list->next;
+		length++;
+		n = n / base;
 	}
-	ft_putstr("[NULL]");
-	ft_putchar('\n');
+	return (length);
 }
