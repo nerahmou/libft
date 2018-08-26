@@ -13,13 +13,31 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 32
+# define BUFF_SIZE 11
+
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 # include <wchar.h>
 # include "ft_printf.h"
 
+# define SET_BLUE "\e[34m"
+# define SET_RED "\e[31m"
+# define SET_GREEN "\e[32m"
+
+# define SET_BBLUE "\e[44m"
+# define SET_BRED "\e[41m"
+# define SET_BGREEN "\e[42m"
+
+# define ITALIC "{italic}"
+# define BOLD "{bold}"
+# define UNDERLINE "{underline}"
+
+# define SET_BOLD "\e[1m"
+# define SET_ITALIC "\e[3m"
+# define SET_UNDERLINE "\e[4m"
+
+# define SET_RES "\e[0m"
 
 typedef struct		s_list
 {

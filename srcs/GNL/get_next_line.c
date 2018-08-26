@@ -47,11 +47,12 @@ static int		read_fd(int fd, char **line, char **tmp_st)
 	int		ret;
 	int		b_n;
 
-	while ((ret = read(fd, buff, BUFF_SIZE)) && ret != -1)
+	while ((ret = read(fd, buff, BUFF_SIZE)) > 0/* && ret != -1*/)
 	{
 		buff[ret] = 0;
 		if (ft_strchr(buff, '\n'))
 		{
+			//printf("buff:[%s] | BUFF_SIZE:%d | ret:%d | line:[%s] | tmp_st:[%s]\n", buff, BUFF_SIZE, ret, *line, *tmp_st);
 			b_n = ft_char_pos(buff, '\n');
 			if (buff[b_n + 1] != 0 || ret == BUFF_SIZE)
 				return (get_tmp(line, tmp_st, buff));

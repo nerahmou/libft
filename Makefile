@@ -10,8 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all, clean, fclean
-.SUFFIXES:
+.PHONY: all, clean, fclean, re
 
 _END=$'\x1b[0m
 _BOLD=$'\x1b[1m
@@ -22,15 +21,14 @@ _IRED=$'\x1b[41m
 _IGREEN=$'\x1b[42m
 _IYELLOW=$'\x1b[43m
 
-AR= libft.a
-CC = gcc -g
-CFLAGS = -Wall -Wextra -Werror
-PATH_OBJ = ./objs/
-PATH_SRC = ./srcs/
-PATH_INC = ./includes/
-INCS = $(addprefix $(PATH_INC), libft.h)
-INCS += $(addprefix $(PATH_INC), ft_printf.h)
-
+NAME := libft.a
+AR += rcs
+CC := gcc
+CFLAGS := -g -Wall -Wextra -Werror
+PATH_OBJ := ./objs/
+PATH_SRC := ./srcs/
+INCS := ./includes/
+RM := rm -rf
 
 #******************************************************************************#
 #                                    LIBFT                                     #
@@ -117,16 +115,15 @@ FILES_LIB =	ft_memchr.c\
 		ft_wcharlen.c\
 		ft_lstlen.c\
 		ft_tablength.c\
-		ft_strchr_occur.c
+		ft_strchr_occur.c\
 
 OBJ_LIB = $(addprefix $(PATH_OBJ_LIB), $(FILES_LIB:.c=.o))
 SRC_LIB = $(addprefix $(PATH_SRC_LIB), $(FILES_LIB))
 
 
 #******************************************************************************#
-#                                    GNL                                   #
+#                                    GNL                                       #
 #******************************************************************************#
-
 
 PATH_OBJ_GNL = $(PATH_OBJ)GNL/
 PATH_SRC_GNL = $(PATH_SRC)GNL/
@@ -134,6 +131,7 @@ FILES_GNL = get_next_line.c
 
 OBJ_GNL = $(addprefix $(PATH_OBJ_GNL), $(FILES_GNL:.c=.o))
 SRC_GNL = $(addprefix $(PATH_SRC_GNL), $(FILES_GNL))
+
 #******************************************************************************#
 #                                    PRINT_F                                   #
 #******************************************************************************#
@@ -158,41 +156,42 @@ FILES_PRF =	ft_printf.c\
 			print_m.c \
 			nbr_size.c
 
-
-
 OBJ_PRF = $(addprefix $(PATH_OBJ_PRF), $(FILES_PRF:.c=.o))
 SRC_PRF = $(addprefix $(PATH_SRC_PRF), $(FILES_PRF))
 
 #******************************************************************************#
 #                                    ALL                                       #
 #******************************************************************************#
-PATHS_OBJ = $(PATH_OBJ) $(PATH_OBJ_LIB) $(PATH_OBJ_PRF) $(PATH_OBJ_GNL)
 
-OBJS = $(OBJ_LIB) $(OBJ_PRF) $(OBJ_GNL)
+PATHS_OBJ = $(PATH_OBJ_LIB)  $(PATH_OBJ_GNL) $(PATH_OBJ_PRF)
 
-SRCS = $(SRC_LIB) $(SRC_PRF) $(OBJ_GNL)
+OBJS = $(OBJ_LIB) $(OBJ_GNL) $(OBJ_PRF)
 
-FILES = $(FILES_LIB) $(FILES_PRF) $(FILES_GNL)
+SRCS = $(SRC_LIB) $(SRC_GNL) $(SRC_PRF)
 
-all: $(AR)
+FILES = $(FILES_LIB) $(FILES_GNL) $(FILES_PRF)
 
-$(AR): $(PATHS_OBJ) $(OBJS) $(INCS)
-	@ar rcs $(AR) $(OBJS)
+all: $(NAME)
+
+$(NAME): $(PATHS_OBJ) $(OBJS) $(INCS)
+	@$(AR) $(NAME) $(OBJS)
 	@echo "Library created 👍 \n"
 
 $(PATHS_OBJ):
-	@mkdir $@
+	@mkdir -p $@
+	@clear
 
-$(PATH_OBJ)%.o: $(PATH_SRC)%.c
+$(PATH_OBJ)%.o: $(PATH_SRC)%.c $(INCS)
 	@echo "[$(_BOLD)$(_IRED)$(notdir $<)\033[0;0m] -> [$(_BOLD)$(_IGREEN)$(notdir $@)\033[0;0m]"
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(PATH_INC)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCS)
+	@clear
 
 clean:
-	@rm -rf $(PATH_OBJ)
+	@$(RM) $(PATH_OBJ)
 	@echo	"Clean libft O.K.\n"
 	
 fclean: clean
-	@rm -f $(AR)
+	@$(RM) $(NAME)
 	@echo	"Fclean libft O.K.\n"
 
 re: fclean all
